@@ -6,7 +6,7 @@ type Props = {
   };
 };
 export default function page({ params }: Props) {
-  return <h1>{params.pants}소개페이지</h1>;
+  return <h1>{params.pants}제품설명페이지</h1>;
 }
 // 미리 경로만들기
 export function generateStaticParams() {
