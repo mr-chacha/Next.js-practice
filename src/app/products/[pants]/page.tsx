@@ -21,8 +21,8 @@ export default function page({ params: { pants } }: Props) {
   return <h1>{product}제품설명페이지</h1>;
 }
 // 미리 경로만들기
-export function generateStaticParams() {
+export async function generateStaticParams() {
   // 모든제품의 페이지들을 미리 만들어 둘 수있게 함(SSG)
-  const products = getProducts();
+  const products = await getProducts();
   return products.map((products) => ({ pants: products }));
 }
