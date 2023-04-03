@@ -1,3 +1,4 @@
+import { getProduct, getProducts } from "@/service/products";
 import React from "react";
 
 type Props = {
@@ -11,11 +12,17 @@ export function generateMetadata({ params }: Props) {
     title: `제품의이름 : ${params.pants}`,
   };
 }
-export default function page({ params }: Props) {
-  return <h1>{params.pants}제품설명페이지</h1>;
+export default function page({ params: { pants } }: Props) {
+  const product = getProduct(pants);
+  if (!product) {
+    alert("제품이 없음");
+  }
+  //서버 파일에 있는 데이터중 해당 제품의 정보를 찾아서 그걸 보여줌
+  return <h1>{product}제품설명페이지</h1>;
 }
 // 미리 경로만들기
 export function generateStaticParams() {
-  const products = ["skirt", "pants"];
+  // 모든제품의 페이지들을 미리 만들어 둘 수있게 함(SSG)
+  const products = getProducts();
   return products.map((products) => ({ pants: products }));
 }
